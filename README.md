@@ -9,7 +9,6 @@
 - This repository is customized **_specifically for OCI us-phoenix-1_** deployment
 - This repository uses the ```aviatrix_controller_config``` to enable security group management
   
-
 ### Infrastructure diagram
 
 <img src="img/oci-dual-transit-firenet-example.png" height="400">
@@ -49,6 +48,31 @@ Runtime - ~1h, monitor through OCI Console & Aviatrix Controller
 - ```terraform init```
 - ```terraform plan```
 - ```terraform apply --auto-approve```
+
+## Addressed an issue identified June 22 to add ```egress_enabled=true```
+
+For this issue:
+
+```
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  ~ update in-place
+Terraform will perform the following actions:
+  # module.oci_transit_firenet_2.aviatrix_firenet.firenet will be updated in-place
+  ~ resource "aviatrix_firenet" "firenet" {
+      ~ egress_enabled                       = true -> false
+        id                                   = "avx-us-oci-tfa-egr-firenet"
+      ~ keep_alive_via_lan_interface_enabled = true -> false
+        # (6 unchanged attributes hidden)
+    }
+```
+
+- Added variable for egress_enabled so it is passed through to the egress firenet resource
+
+<img src="img/dual-firenet-advanced-view.png">
+
+
+
 
 ### Terraform state (post-provisioning)
 

@@ -39,6 +39,7 @@ module "oci_transit_firenet_2" {
   fw_instance_size              = var.firewall_size
   ha_gw                         = var.ha_enabled
   enable_egress_transit_firenet = true
+  egress_enabled                = true
   inspection_enabled            = false
   connected_transit             = false
   insane_mode                   = var.insane_mode
@@ -50,8 +51,6 @@ module "oci_transit_firenet_2" {
 # Ingress
 module "oci_ingress_spoke" {
   source = "./terraform-aviatrix-oci-spoke"
-  #source      = "terraform-aviatrix-modules/oci-spoke/aviatrix"
-  #version     = "4.0.3"
   name        = var.ingress_spoke_name
   cidr        = var.ingress_spoke_cidr
   region      = var.oci_region
