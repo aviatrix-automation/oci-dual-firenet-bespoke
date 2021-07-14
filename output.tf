@@ -13,7 +13,7 @@ output "oci_ingress_spoke" {
   value       = module.oci_ingress_spoke
 }
 
-output "oci_wl1_spoke" {
+/*output "oci_wl1_spoke" {
   description = "Workload 1 spoke"
   value       = module.oci_workload_spoke_1
-}
+}*/

@@ -11,13 +11,13 @@
   
 ### Infrastructure diagram
 
-<img src="img/oci-dual-transit-firenet-example.png" height="400">
+<img src="img/oci-dual-transit-firenet-example-no-workload.png" height="400">
 
 ### Compatibility
 Terraform version | Controller version | Terraform provider version
 :--- | :--- | :---
 0.13,0.14,0.15 | 6.4.2672 | 2.19.3
-
+0.13,0.14,0.15 | 6.4.2776 | 2.19.4
 
 ### Variables
 
@@ -49,7 +49,7 @@ Runtime - ~1h, monitor through OCI Console & Aviatrix Controller
 - ```terraform plan```
 - ```terraform apply --auto-approve```
 
-## Addressed an issue identified June 22 to add ```egress_enabled=true```
+### Addressed an issue identified June 22 to add ```egress_enabled=true```
 
 For this issue:
 
@@ -78,10 +78,6 @@ Terraform will perform the following actions:
 
 ```
 $ terraform state list
-aviatrix_controller_config.sgm_config
-aviatrix_spoke_transit_attachment.egress_attach_wl1
-aviatrix_spoke_transit_attachment.ew_attach_wl1
-aviatrix_spoke_transit_attachment.ingress_attach
 module.oci_ingress_spoke.aviatrix_spoke_gateway.default
 module.oci_ingress_spoke.aviatrix_vpc.default
 module.oci_transit_firenet_1.aviatrix_firenet.firenet
@@ -98,6 +94,5 @@ module.oci_transit_firenet_2.aviatrix_firewall_instance_association.firenet_inst
 module.oci_transit_firenet_2.aviatrix_firewall_instance_association.firenet_instance2[0]
 module.oci_transit_firenet_2.aviatrix_transit_gateway.default
 module.oci_transit_firenet_2.aviatrix_vpc.default
-module.oci_workload_spoke_1.aviatrix_spoke_gateway.default
-module.oci_workload_spoke_1.aviatrix_vpc.default
 ```
+
