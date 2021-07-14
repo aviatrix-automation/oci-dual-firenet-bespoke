@@ -67,8 +67,8 @@ resource "aviatrix_spoke_transit_attachment" "ingress_attach" {
   transit_gw_name = module.oci_transit_firenet_1.transit_gateway.gw_name
 }
 
-// Added a couplesample workload spokes to simplify testing
-
+// Sample workload spoke
+/*
 # WL 1
 module "oci_workload_spoke_1" {
   source      = "./terraform-aviatrix-oci-spoke"
@@ -96,5 +96,5 @@ resource "aviatrix_spoke_transit_attachment" "egress_attach_wl1" {
   spoke_gw_name   = module.oci_workload_spoke_1.spoke_gateway.gw_name
   transit_gw_name = module.oci_transit_firenet_2.transit_gateway.gw_name
   depends_on      = [module.oci_transit_firenet_1, module.oci_transit_firenet_2]
-}
+}*/
 
