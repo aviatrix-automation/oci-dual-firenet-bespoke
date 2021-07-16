@@ -1,5 +1,5 @@
 oci_region             = "us-phoenix-1"
-oci_account_name       = "TM-OCI" # Replace this with the OCI access account name in controller
+oci_account_name       = "TM-OCI"   # Replace this with the OCI access account name in controller
 azure_account_name     = "TM-Azure" # Replace this with the Azure access account name in controller
 ha_enabled             = true
 insane_mode            = true

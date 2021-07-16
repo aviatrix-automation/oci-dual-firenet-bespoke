@@ -1,29 +1,44 @@
-# Phase II Fake F5s
+# Phase Native Ingress infrastructure
+
+F5s, VNICs, PAN, NLB, ALB, load balancer backends
 
 ## Summary
 
-Using the state from Aviatrix provisioning, provision F5 instances into the ingress spoke.
-
-**_Rinse and repeat_** for any additional infrastructure you want to add to the ingress spoke.
+Using the state from Aviatrix provisioning, provision native OCI infrastructure into the ingress spoke.
 
 
 ### 02-oci-native state post-provisioning
 ```
 $ terraform state list
+$ tf13 state list
 data.oci_identity_availability_domains.availability_domains
 data.oci_identity_fault_domains.fault_domains
 data.terraform_remote_state.infra
 oci_core_instance.f5_instance_1
 oci_core_instance.f5_instance_2
+oci_core_instance.palo_fw_1
+oci_core_instance.palo_fw_2
+oci_core_nat_gateway.avx-ingress-nat
 oci_core_vnic_attachment.f5_instance_1_vnic2
 oci_core_vnic_attachment.f5_instance_1_vnic3
 oci_core_vnic_attachment.f5_instance_2_vnic2
 oci_core_vnic_attachment.f5_instance_2_vnic3
+oci_load_balancer_backend.http_backend_1
+oci_load_balancer_backend.http_backend_2
+oci_load_balancer_backend.https_backend_1
+oci_load_balancer_backend.https_backend_2
+oci_load_balancer_backend_set.http_backend_set
+oci_load_balancer_backend_set.https_backend_set
+oci_load_balancer_listener.http_listener
+oci_load_balancer_listener.https_listener
+oci_load_balancer_load_balancer.alb
+oci_network_load_balancer_network_load_balancer.f5_ext_nlb01
+oci_network_load_balancer_network_load_balancer.f5_ext_nlb02
 ```
 
-### To inspect any of the state for indexes from Phase I (in that workspace)
+### To inspect any of the state for indexes from Phase I in ```../oci-dual-firenet-bespoke```
 
-Issue a command similar to this to code additional infrastructure like the F5s
+Issue a command similar to this to code additional infrastructure
 
 ```
 $ terraform state show module.oci_ingress_spoke.aviatrix_vpc.default

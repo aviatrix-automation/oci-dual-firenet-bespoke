@@ -50,7 +50,7 @@ module "oci_transit_firenet_2" {
 
 # Ingress
 module "oci_ingress_spoke" {
-  source = "./terraform-aviatrix-oci-spoke"
+  source      = "./terraform-aviatrix-oci-spoke"
   name        = var.ingress_spoke_name
   cidr        = var.ingress_spoke_cidr
   region      = var.oci_region
