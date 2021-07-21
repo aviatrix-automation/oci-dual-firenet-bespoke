@@ -82,6 +82,7 @@ resource "aviatrix_site2cloud" "chicago1" {
   custom_algorithms          = false
 }*/
 
+
 # Create an Aviatrix Transit External Device Connection 
 resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago1" {
   vpc_id            = module.oci_transit_firenet_1.vcn.name #aviatrix_site2cloud.chicago1.vpc_id
@@ -92,22 +93,22 @@ resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago1" {
   bgp_remote_as_num = "65274"
   ha_enabled        = false
   remote_gateway_ip = "10.55.65.130" # aviatrix_site2cloud.chicago1.remote_gateway_ip
-  #prepend_as_path  = [
-  #  "65274",
-  #  "65458"
-  #]
+  local_tunnel_cidr = "10.55.57.1/30, 10.55.57.5/30"
+  remote_tunnel_cidr= "10.55.57.2/30, 10.55.57.6/30"
 }
 
 # Create an Aviatrix Transit External Device Connection 
 resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago2" {
-  vpc_id            = module.oci_transit_firenet_1.vcn.name #aviatrix_site2cloud.chicago1.vpc_id
-  connection_name   = "CHI2-S2C-ew-ext-conn" #aviatrix_site2cloud.chicago1.connection_name
+  vpc_id            = module.oci_transit_firenet_1.vcn.name  
+  connection_name   = "CHI2-S2C-ew-ext-conn"  
   gw_name           = module.oci_transit_firenet_1.transit_gateway.gw_name
   connection_type   = "bgp"
   bgp_local_as_num  = "65458" 
   bgp_remote_as_num = "65274"
   ha_enabled        = false
-  remote_gateway_ip = "10.55.65.134" # aviatrix_site2cloud.chicago1.remote_gateway_ip
+  remote_gateway_ip = "10.55.65.134"  
+  local_tunnel_cidr = "10.55.57.9/30, 10.55.57.13/30"
+  remote_tunnel_cidr= "10.55.57.10/30, 10.55.57.14/30"
   prepend_as_path  = [
     "65458",
     "65458",
