@@ -23,6 +23,14 @@ data "oci_identity_fault_domains" "fault_domains" {
   compartment_id      = var.compartment_ocid
 }
 
+####################################################################################################################
+# Get Aviatrix EW Firewall instance 1 id (example to work from)
+####################################################################################################################
+data "oci_core_vnic_attachments" "ew_fw_vnics" {
+    compartment_id = var.compartment_ocid
+    instance_id    = data.terraform_remote_state.infra.outputs.oci_eastwest_firenet.aviatrix_firewall_instance[0].instance_id
+}
+
 #######################################
 ##### Fake F5s
 #######################################

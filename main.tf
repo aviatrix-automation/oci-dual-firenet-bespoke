@@ -65,104 +65,39 @@ resource "aviatrix_spoke_transit_attachment" "ingress_attach" {
   transit_gw_name = module.oci_transit_firenet_1.transit_gateway.gw_name
 }
 
-/*
-# S2C
-// Chicago 1
-resource "aviatrix_site2cloud" "chicago1" {
-  connection_name            = "CHI1"
-  connection_type            = "unmapped"
-  primary_cloud_gateway_name = module.oci_transit_firenet_1.transit_gateway.gw_name
-  remote_gateway_ip          = "10.55.65.130"
-  remote_gateway_type        = "generic"
-  remote_subnet_cidr         = "10.55.57.2/32, 10.55.57.6/32"
-  tunnel_type                = "route"
-  vpc_id                     = module.oci_transit_firenet_1.vcn.name
-  pre_shared_key             = "aviatrix"
-  enable_ikev2               = true
-  custom_algorithms          = false
-}*/
-
-
 # Create an Aviatrix Transit External Device Connection 
 resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago1" {
-  vpc_id            = module.oci_transit_firenet_1.vcn.name #aviatrix_site2cloud.chicago1.vpc_id
-  connection_name   = "CHI1-S2C-ew-ext-conn" #aviatrix_site2cloud.chicago1.connection_name
-  gw_name           = module.oci_transit_firenet_1.transit_gateway.gw_name
-  connection_type   = "bgp"
-  bgp_local_as_num  = "65458" 
-  bgp_remote_as_num = "65274"
-  ha_enabled        = false
-  remote_gateway_ip = "10.55.65.130" # aviatrix_site2cloud.chicago1.remote_gateway_ip
-  local_tunnel_cidr = "10.55.57.1/30, 10.55.57.5/30"
-  remote_tunnel_cidr= "10.55.57.2/30, 10.55.57.6/30"
+  vpc_id             = module.oci_transit_firenet_1.vcn.name  
+  connection_name    = "CHI1-S2C-ew-ext-conn"                 
+  gw_name            = module.oci_transit_firenet_1.transit_gateway.gw_name
+  connection_type    = "bgp"
+  bgp_local_as_num   = "65458"
+  bgp_remote_as_num  = "65274"
+  ha_enabled         = false
+  remote_gateway_ip  = "10.55.65.130" # aviatrix_site2cloud.chicago1.remote_gateway_ip
+  local_tunnel_cidr  = "10.55.57.1/30, 10.55.57.5/30"
+  remote_tunnel_cidr = "10.55.57.2/30, 10.55.57.6/30"
 }
 
 # Create an Aviatrix Transit External Device Connection 
 resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago2" {
-  vpc_id            = module.oci_transit_firenet_1.vcn.name  
-  connection_name   = "CHI2-S2C-ew-ext-conn"  
-  gw_name           = module.oci_transit_firenet_1.transit_gateway.gw_name
-  connection_type   = "bgp"
-  bgp_local_as_num  = "65458" 
-  bgp_remote_as_num = "65274"
-  ha_enabled        = false
-  remote_gateway_ip = "10.55.65.134"  
-  local_tunnel_cidr = "10.55.57.9/30, 10.55.57.13/30"
-  remote_tunnel_cidr= "10.55.57.10/30, 10.55.57.14/30"
-  prepend_as_path  = [
+  vpc_id             = module.oci_transit_firenet_1.vcn.name
+  connection_name    = "CHI2-S2C-ew-ext-conn"
+  gw_name            = module.oci_transit_firenet_1.transit_gateway.gw_name
+  connection_type    = "bgp"
+  bgp_local_as_num   = "65458"
+  bgp_remote_as_num  = "65274"
+  ha_enabled         = false
+  remote_gateway_ip  = "10.55.65.134"
+  local_tunnel_cidr  = "10.55.57.9/30, 10.55.57.13/30"
+  remote_tunnel_cidr = "10.55.57.10/30, 10.55.57.14/30"
+  prepend_as_path = [
     "65458",
     "65458",
     "65458",
     "65458"
   ]
 }
-
-
-
-/*
-
-
-ha_enabled - (Optional) Set as true if there are two external devices.
-backup_remote_gateway_ip - (Optional) Backup remote gateway IP. Required if HA enabled.
-backup_bgp_remote_as_num - (Optional) Backup BGP remote ASN (Autonomous System Number). Integer between 1-4294967294. Required if HA enabled for 'bgp' connection.
-backup_pre_shared_key - (Optional) Backup Pre-Shared Key.
-backup_local_tunnel_cidr - (Optional) Source CIDR for the tunnel from the backup Aviatrix transit gateway.
-backup_remote_tunnel_cidr - (Optional) Destination CIDR for the tunnel to the backup external device.
-backup_direct_connect - (Optional) Backup direct connect for backup external device.
-// Chicago 2
-resource "aviatrix_site2cloud" "chicago2" {
-  connection_name            = "CHI2"
-  connection_type            = "unmapped"
-  primary_cloud_gateway_name = module.oci_transit_firenet_1.transit_gateway.gw_name
-  remote_gateway_ip          = "10.55.65.134"
-  remote_gateway_type        = "generic"
-  remote_subnet_cidr         = "10.55.57.10/32, 10.55.57.14/32"
-  tunnel_type                = "route"
-  vpc_id                     = module.oci_transit_firenet_1.vcn.name
-  pre_shared_key             = "aviatrix"
-  enable_ikev2               = true
-  custom_algorithms          = false
-}
-
-# Create an Aviatrix Transit External Device Connection with Connection AS Path Prepend set
-resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago2" {
-  vpc_id            = aviatrix_site2cloud.chicago1.vpc_id
-  connection_name   = "CHI1-ew-ext-conn" #aviatrix_site2cloud.chicago1.connection_name
-  gw_name           = module.oci_transit_firenet_1.transit_gateway.gw_name
-  connection_type   = "bgp"
-  bgp_local_as_num  = "65458" 
-  bgp_remote_as_num = "65274"
-  remote_gateway_ip = aviatrix_site2cloud.chicago1.remote_gateway_ip
-  prepend_as_path  = [
-    "65274",
-    "65458"
-  ]
-}
-*/
-
-
-
-
 
 // Sample workload spoke
 /*

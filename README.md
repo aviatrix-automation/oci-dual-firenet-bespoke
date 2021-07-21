@@ -9,6 +9,12 @@
 - This repository is customized **_specifically for OCI us-phoenix-1_** deployment
 - This repository uses the ```aviatrix_controller_config``` to enable security group management
   
+## Enhancements 7-21-2021
+
+- Added ``bgp_ecmp=true`` on ew transit firenet
+- Added ```excluded_advertised_spoke_routes = module.oci_ingress_spoke.vcn.private_subnets[1].cidr`` on ew transit firenet
+- Added two Site-to-Cloud external connections to ew transit firenet ```aviatrix_transit_external_device_conn```
+  
 ### Infrastructure diagram
 
 <img src="img/oci-dual-transit-firenet-example-no-workload.png" height="400">
@@ -17,7 +23,7 @@
 Terraform version | Controller version | Terraform provider version
 :--- | :--- | :---
 0.13,0.14,0.15 | 6.4.2672 | 2.19.3
-0.13,0.14,0.15 | 6.4.2776 | 2.19.4
+0.13,0.14,0.15 | 6.4.2776 | 2.19.5
 
 ### Variables
 
@@ -70,8 +76,6 @@ Terraform will perform the following actions:
 - Added variable for egress_enabled so it is passed through to the egress firenet resource
 
 <img src="img/dual-firenet-advanced-view.png">
-
-
 
 
 ### Terraform state (post-provisioning)
