@@ -193,6 +193,12 @@ variable "enable_egress_transit_firenet" {
   default     = false
 }
 
+variable "excluded_advertised_spoke_routes" {
+  description = "A list of comma-separated CIDRs to be advertised to on-prem as 'Excluded CIDR List'"
+  type        = string
+  default     = null
+}
+
 variable "insane_mode" {
   type    = bool
   default = false
