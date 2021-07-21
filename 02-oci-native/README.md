@@ -10,7 +10,6 @@ Using the state from Aviatrix provisioning, provision native OCI infrastructure 
 ### 02-oci-native state post-provisioning
 ```
 $ terraform state list
-$ tf13 state list
 data.oci_identity_availability_domains.availability_domains
 data.oci_identity_fault_domains.fault_domains
 data.terraform_remote_state.infra

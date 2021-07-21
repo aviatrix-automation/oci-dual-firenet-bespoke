@@ -37,6 +37,7 @@ resource "aviatrix_transit_gateway" "default" {
   enable_egress_transit_firenet    = var.enable_egress_transit_firenet
   local_as_number                  = var.local_as_number
   enable_bgp_over_lan              = var.enable_bgp_over_lan
+  excluded_advertised_spoke_routes = var.excluded_advertised_spoke_routes
   availability_domain              = "PHX-AD-1"
   fault_domain                     = "FAULT-DOMAIN-1"
   ha_availability_domain           = "PHX-AD-2"
@@ -99,6 +100,7 @@ resource "aviatrix_firenet" "firenet" {
   inspection_enabled                   = var.inspection_enabled
   egress_enabled                       = var.egress_enabled
   manage_firewall_instance_association = false
+  fail_close_enabled                   = true
   depends_on                           = [aviatrix_firewall_instance_association.firenet_instance, aviatrix_firewall_instance_association.firenet_instance1, aviatrix_firewall_instance_association.firenet_instance2]
 }
 
