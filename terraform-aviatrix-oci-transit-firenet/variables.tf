@@ -199,6 +199,12 @@ variable "excluded_advertised_spoke_routes" {
   default     = null
 }
 
+variable "keep_alive_via_lan_interface_enabled" {
+  description = "Enable Keep Alive via Firewall LAN Interface"
+  type        = bool
+  default     = true
+}
+
 variable "insane_mode" {
   type    = bool
   default = false
