@@ -67,8 +67,8 @@ resource "aviatrix_spoke_transit_attachment" "ingress_attach" {
 
 # Create an Aviatrix Transit External Device Connection 
 resource "aviatrix_transit_external_device_conn" "ew_firenet_chicago1" {
-  vpc_id             = module.oci_transit_firenet_1.vcn.name  
-  connection_name    = "CHI1-S2C-ew-ext-conn"                 
+  vpc_id             = module.oci_transit_firenet_1.vcn.name
+  connection_name    = "CHI1-S2C-ew-ext-conn"
   gw_name            = module.oci_transit_firenet_1.transit_gateway.gw_name
   connection_type    = "bgp"
   bgp_local_as_num   = "65458"

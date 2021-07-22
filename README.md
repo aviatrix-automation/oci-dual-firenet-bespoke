@@ -12,8 +12,9 @@
 ## Enhancements 7-21-2021
 
 - Added ``bgp_ecmp=true`` on ew transit firenet
-- Added ```excluded_advertised_spoke_routes = module.oci_ingress_spoke.vcn.private_subnets[1].cidr`` on ew transit firenet
+- Added ```excluded_advertised_spoke_routes = module.oci_ingress_spoke.vcn.private_subnets[1].cidr``` on ew transit firenet
 - Added two Site-to-Cloud external connections to ew transit firenet ```aviatrix_transit_external_device_conn```
+- Added ```keep_alive_via_lan_interface_enabled = true``` 
   
 ### Infrastructure diagram
 
