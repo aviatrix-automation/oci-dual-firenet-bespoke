@@ -96,6 +96,8 @@ variable "insane_mode" {
   type    = bool
   default = false
 }
+variable "firewall_image" {}
+
 variable "firewall_image_version" {} # i.e. 9.1.3, 9.1.6, 10.0.4
 
 variable "firewall_size" {} # i.e. VM.Standard2.4, VM.Standard2.8

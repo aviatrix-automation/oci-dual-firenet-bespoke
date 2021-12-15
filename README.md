@@ -1,14 +1,23 @@
-# OCI Dual FireNet Bespoke with sgm config (us-phoenix-1)
+# OCI Dual FireNet Bespoke
+
+## **_Updated mid-Dec to reflect HPE spokes attached to Transit FireNet (6.5)_**
 
 ##  Advanced **_customized_** example demonstrating the use of multiple Transit FireNet and an Ingress Spoke
 
 - Built with https://registry.terraform.io/modules/terraform-aviatrix-modules/oci-transit-firenet/aviatrix/latest
-- Spoke module from TF registry local to this repo customized to account for multiple attachments (eastwest & egress)
 - Drive it by variables as needed
 - Set TF_VARs for username, controller_ip, password in your env
 - This repository is customized **_specifically for OCI us-phoenix-1_** deployment
-- This repository uses the ```aviatrix_controller_config``` to enable security group management
+
   
+## Enhancements 12-15-2021
+- removed ```aviatrix_controller_config``` per request
+- added ```insane_mode = true``` for HPE
+- removed local module reference for OCI spokes using https://registry.terraform.io/modules/terraform-aviatrix-modules/oci-spoke/aviatrix/latest instead
+- removed S2C connections
+- updated README
+
+
 ## Enhancements 7-21-2021
 
 - Added ``bgp_ecmp=true`` on ew transit firenet
@@ -23,6 +32,7 @@
 ### Compatibility
 Terraform version | Controller version | Terraform provider version
 :--- | :--- | :---
+0.13,0.14,0.15 | 6.5.2721 | 2.20.3
 0.13,0.14,0.15 | 6.4.2672 | 2.19.3
 0.13,0.14,0.15 | 6.4.2776 | 2.19.5
 
@@ -83,6 +93,9 @@ Terraform will perform the following actions:
 
 ```
 $ terraform state list
+aviatrix_spoke_transit_attachment.egress_attach_wl1
+aviatrix_spoke_transit_attachment.ew_attach_wl1
+aviatrix_spoke_transit_attachment.ingress_attach
 module.oci_ingress_spoke.aviatrix_spoke_gateway.default
 module.oci_ingress_spoke.aviatrix_vpc.default
 module.oci_transit_firenet_1.aviatrix_firenet.firenet
@@ -99,5 +112,7 @@ module.oci_transit_firenet_2.aviatrix_firewall_instance_association.firenet_inst
 module.oci_transit_firenet_2.aviatrix_firewall_instance_association.firenet_instance2[0]
 module.oci_transit_firenet_2.aviatrix_transit_gateway.default
 module.oci_transit_firenet_2.aviatrix_vpc.default
+module.oci_workload_spoke_1.aviatrix_spoke_gateway.default
+module.oci_workload_spoke_1.aviatrix_vpc.default
 ```
 
